@@ -19,10 +19,10 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Last changed  : $Date: 2017-04-07 22:01:22 +0300 (pe, 07 huhti 2017) $
+// Last changed  : $Date$
 // File revision : $Revision: 1.12 $
 //
-// $Id: TDStretch.cpp 249 2017-04-07 19:01:22Z oparviai $
+// $Id$
 //
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -134,8 +134,13 @@ void TDStretch::setParameters(int aSampleRate, int aSequenceMS,
                               int aSeekWindowMS, int aOverlapMS)
 {
     // accept only positive parameter values - if zero or negative, use old values instead
-    if (aSampleRate > 0)   this->sampleRate = aSampleRate;
-    if (aOverlapMS > 0)    this->overlapMs = aOverlapMS;
+    if (aSampleRate > 0)
+    {
+        if (aSampleRate > 192000) ST_THROW_RT_ERROR("Error: Excessive samplerate");
+        this->sampleRate = aSampleRate;
+    }
+
+    if (aOverlapMS > 0) this->overlapMs = aOverlapMS;
 
     if (aSequenceMS > 0)
     {

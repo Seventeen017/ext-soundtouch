@@ -8,10 +8,10 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Last changed  : $Date: 2017-07-30 12:28:06 +0300 (su, 30 heinä 2017) $
+// Last changed  : $Date$
 // File revision : $Revision: 3 $
 //
-// $Id: STTypes.h 252 2017-07-30 09:28:06Z oparviai $
+// $Id$
 //
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -53,7 +53,13 @@ typedef unsigned long   ulong;
 // Helper macro for aligning pointer up to next 16-byte boundary
 #define SOUNDTOUCH_ALIGN_POINTER_16(x)      ( ( (ulongptr)(x) + 15 ) & ~(ulongptr)15 )
 
-#include "soundtouch_config.h"
+
+#if (defined(__GNUC__) && !defined(ANDROID))
+    // In GCC, include soundtouch_config.h made by config scritps.
+    // Skip this in Android compilation that uses GCC but without configure scripts.
+    #include "soundtouch_config.h"
+#endif
+
 
 namespace soundtouch
 {

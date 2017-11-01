@@ -2,4 +2,4 @@
 #undef SOUNDTOUCH_FLOAT_SAMPLES
 
 /* Use Integer as Sample type */
-#define SOUNDTOUCH_INTEGER_SAMPLES 1
+#undef SOUNDTOUCH_INTEGER_SAMPLES
